@@ -1,0 +1,34 @@
+<html t:type="layout" title="testing Index" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	xmlns:p="tapestry:parameter">
+	<form t:type="form" t:id="AjaxLoopForm">
+		<t:errors />
+		<table>
+			<thead>
+				<tr>
+					<th>Property</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr t:id="AjaxLoop" t:type="AjaxFormLoop" t:source="myList" t:value="testBean" t:encoder="encoder">
+					<t:submitnotifier>
+						<td>
+							<input t:type="TextField" t:id="testProperty" t:value="testBean.testProperty" />
+						</td>
+						<td>
+							<t:removerowlink>remove</t:removerowlink>
+						</td>
+					</t:submitnotifier>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+	<a href="/foo/ajaxformloop.ajaxloop:triggerremoverow/bla" id="removeRowLink">Remove Row</a>
+	<a href="/foo/ajaxformloop.ajaxloop.rowinjector:inject?t:formcomponentid=AjaxFormLoop:ajaxloopform&amp;t:formid=AjaxLoopForm"
+		id="addRowLink">Add Row</a>
+
+	<t:eventlink t:id="dummy" id="dummy">Dummy</t:eventlink>
+</html>
+
+
+ 

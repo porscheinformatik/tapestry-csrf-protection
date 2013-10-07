@@ -1,0 +1,110 @@
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.apache.tapestry</groupId>
+	<artifactId>tapestry-csrf-protection</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>Tapestry CSRF Protection</name>
+	<description>Cross-Site-Request-Forgery (CSRF) protection for Apache Tapestry 5.
+
+This project is based on the Google Summer of Code 2011 project done by Markus Jung: https://code.google.com/p/gsoc2011-csrf-protection/. Some ideas and also code has been copied to start this Tapestry addon.</description>
+	<organization>
+		<name>Porsche Informatik</name>
+		<url>http://www.porscheinformatik.com/</url>
+	</organization>
+	<inceptionYear>2013</inceptionYear>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/porscheinformatik/tapestry-csrf-protection</url>
+		<connection>http://github.com/porscheinformatik/tapestry-csrf-protection.git</connection>
+		<developerConnection>http://github.com/porscheinformatik/tapestry-csrf-protection.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<properties>
+		<tapestry-release-version>5.3.7</tapestry-release-version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-core</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.tapestryxpath</groupId>
+			<artifactId>tapestry-xpath</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-test</artifactId>
+			<version>${tapestry-release-version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>1.5</version>
+				<configuration>
+					<licenseName>apache_v2</licenseName>
+					<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+					<verbose>false</verbose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<optimize>true</optimize>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Tapestry-Module-Classes>org.apache.tapestry5.csrfprotection.services.CsrfProtectionModule</Tapestry-Module-Classes>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<reporting>
+		<!-- Adds a report detailing the components, mixins and base classes defined by this module. -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tapestry</groupId>
+				<artifactId>tapestry-component-report</artifactId>
+				<version>${tapestry-release-version}</version>
+				<configuration>
+					<rootPackage>org.apache.tapestry.csrfprotection</rootPackage>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>

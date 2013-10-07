@@ -1,0 +1,13 @@
+<html t:type="layout" title="testing Index" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	xmlns:p="tapestry:parameter">
+	<t:beandisplay object="testBean" />
+	<p>
+		<t:actionlink id="actionLink" t:id="actionLink">ActionLink</t:actionlink>
+	</p>
+	<p>
+		<t:eventlink id="eventLink1" t:id="eventLink1">EventLink1</t:eventlink>
+	</p>
+	<p>
+		<t:eventlink id="eventLink2" t:id="eventLink2">EventLink2</t:eventlink>
+	</p>
+</html>
