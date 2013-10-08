@@ -22,10 +22,9 @@ public class CsrfProtectionFilter implements ComponentEventRequestFilter
     /**
      * Creates a new filter and injects the required services and configuration parameters.
      * 
-     * @param applicationStateManager
-     * @param componentClassResolver
-     * @param request
-     * @param antiCsrfMode
+     * @param applicationStateManager .
+     * @param protectedPagesService .
+     * @param request .
      */
     public CsrfProtectionFilter(
         ApplicationStateManager applicationStateManager,
@@ -40,9 +39,11 @@ public class CsrfProtectionFilter implements ComponentEventRequestFilter
 
     /**
      * Handles a component event request and evaluates the cross-site request forgery protection.
+     *
+     * @param parameters .
+     * @param handler .
      * 
      * @throws IOException when delegate throws
-     * @See CsrfProtectionClassTransformWorker
      */
     public void handle(ComponentEventRequestParameters parameters, ComponentEventRequestHandler handler)
         throws IOException

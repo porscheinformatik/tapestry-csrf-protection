@@ -14,6 +14,11 @@ import org.apache.tapestry5.services.ComponentEventRequestFilter;
 import org.apache.tapestry5.services.ComponentEventRequestHandler;
 import org.apache.tapestry5.services.linktransform.ComponentEventLinkTransformer;
 
+/**
+ * IoC module for Tapestry CSRF Protection.
+ * 
+ * CHECKSTYLE:OFF
+ */
 public class CsrfProtectionModule
 {
     public static void bind(ServiceBinder binder)

@@ -8,11 +8,18 @@ import org.apache.tapestry5.ioc.internal.util.TapestryException;
 import org.apache.tapestry5.services.ComponentClassResolver;
 import org.apache.tapestry5.services.ComponentEventRequestParameters;
 
+/**
+ * Service that provides information which pages are protected.
+ */
 public class ProtectedPagesService
 {
     private final ComponentClassResolver componentClassResolver;
     private final CsrfProtectionMode antiCsrfMode;
 
+    /**
+     * @param componentClassResolver injected
+     * @param antiCsrfMode symbol {@link CsrfConstants#CSRF_PROTECTION_MODE}
+     */
     public ProtectedPagesService(ComponentClassResolver componentClassResolver,
         @Value("${" + CsrfConstants.CSRF_PROTECTION_MODE + "}") CsrfProtectionMode antiCsrfMode)
     {
@@ -20,6 +27,10 @@ public class ProtectedPagesService
         this.antiCsrfMode = antiCsrfMode;
     }
 
+    /**
+     * @param parameters the {@link ComponentEventRequestParameters} for the request or link
+     * @return true if page should be CSRF protected, false otherwise
+     */
     public boolean isPageProtected(ComponentEventRequestParameters parameters)
     {
         if (antiCsrfMode == CsrfProtectionMode.OFF)

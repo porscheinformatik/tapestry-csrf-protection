@@ -23,6 +23,8 @@ public class CsrfTokenProvider
 
     /**
      * Initializes the secure token that will stay the same for the whole life cycle of this instance.
+     * 
+     * @param applicationStateManager {@link ApplicationStateManager}
      */
     public CsrfTokenProvider(ApplicationStateManager applicationStateManager)
     {
@@ -30,9 +32,9 @@ public class CsrfTokenProvider
     }
 
     /**
-     * Returns the token stored in this instance.s
+     * Returns the token stored in this instance.
      * 
-     * @return
+     * @return the stored token or a newly generated one
      */
     public String getSessionToken()
     {
@@ -49,12 +51,11 @@ public class CsrfTokenProvider
      * This method performs the check of the token. It extracts the current client token from the request and the
      * current server-side token by accessing the CsrfTokenProvider instance assigned in this session.
      * 
-     * @param request
-     * @param applicationStateManager
-     * @return
-     * @throws CsrfException
+     * @param request .
+     * @param applicationStateManager .
+     * @throws CsrfException when token not there or token does not match
      */
-    public static boolean checkToken(Request request, ApplicationStateManager applicationStateManager)
+    public static void checkToken(Request request, ApplicationStateManager applicationStateManager)
         throws CsrfException
     {
         String requestParam = getClientToken(request);
@@ -65,16 +66,14 @@ public class CsrfTokenProvider
             LOGGER.debug("SessionToken: " + serverToken + ", ClientToken: " + requestParam);
         }
 
-        if (serverToken != null && serverToken.equals(requestParam))
+        if (serverToken == null || !serverToken.equals(requestParam))
         {
-            return true;
+            LOGGER.warn("CSRF Attack detected. Server-Token: {}  vs. Client-Token: {}",
+                CsrfTokenProvider.getServerToken(applicationStateManager), CsrfTokenProvider.getClientToken(request));
+
+            throw new CsrfException("CSRF Attack detected. Invalid client token: "
+                + CsrfTokenProvider.getClientToken(request));
         }
-
-        LOGGER.warn("CSRF Attack detected. Server-Token: {}  vs. Client-Token: {}",
-            CsrfTokenProvider.getServerToken(applicationStateManager), CsrfTokenProvider.getClientToken(request));
-
-        throw new CsrfException("CSRF Attack detected. Invalid client token: "
-            + CsrfTokenProvider.getClientToken(request));
     }
 
     /**

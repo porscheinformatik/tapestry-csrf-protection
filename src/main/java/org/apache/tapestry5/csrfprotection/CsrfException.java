@@ -10,6 +10,9 @@ public class CsrfException extends RuntimeException
      */
     private static final long serialVersionUID = 9041230161539868440L;
 
+    /**
+     * @param msg .
+     */
     public CsrfException(String msg)
     {
         super(msg);

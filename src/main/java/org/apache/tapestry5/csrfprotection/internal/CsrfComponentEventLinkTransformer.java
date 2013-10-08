@@ -14,6 +14,10 @@ public class CsrfComponentEventLinkTransformer implements ComponentEventLinkTran
     private final CsrfTokenProvider csrfTokenProvider;
     private final ProtectedPagesService protectedPagesService;
 
+    /**
+     * @param csrfTokenProvider .
+     * @param protectedPagesService .
+     */
     public CsrfComponentEventLinkTransformer(CsrfTokenProvider csrfTokenProvider,
         ProtectedPagesService protectedPagesService)
     {
@@ -22,6 +26,9 @@ public class CsrfComponentEventLinkTransformer implements ComponentEventLinkTran
         this.protectedPagesService = protectedPagesService;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Link transformComponentEventLink(Link defaultLink, ComponentEventRequestParameters parameters)
     {
         if (protectedPagesService.isPageProtected(parameters))
@@ -32,6 +39,9 @@ public class CsrfComponentEventLinkTransformer implements ComponentEventLinkTran
         return defaultLink;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public ComponentEventRequestParameters decodeComponentEventRequest(Request request)
     {
         return null;
