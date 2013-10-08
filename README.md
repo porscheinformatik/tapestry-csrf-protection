@@ -5,6 +5,8 @@ Tapestry CSRF Protection
 
 Cross-Site-Request-Forgery (CSRF) protection for Apache Tapestry 5.
 
+This project is based on the GSoC 2011 project hosted on Google Code: https://code.google.com/p/gsoc2011-csrf-protection/
+
 ## License
 
 This software is licensed under the Apache Software License, Version 2.0, http://www.apache.org/licenses/LICENSE-2.0.txt
