@@ -61,16 +61,6 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>license-maven-plugin</artifactId>
-				<version>1.5</version>
-				<configuration>
-					<licenseName>apache_v2</licenseName>
-					<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
-					<verbose>false</verbose>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -79,7 +69,19 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 					<optimize>true</optimize>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
