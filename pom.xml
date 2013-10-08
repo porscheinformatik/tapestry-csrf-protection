@@ -24,8 +24,8 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 
 	<scm>
 		<url>https://github.com/porscheinformatik/tapestry-csrf-protection</url>
-		<connection>http://github.com/porscheinformatik/tapestry-csrf-protection.git</connection>
-		<developerConnection>http://github.com/porscheinformatik/tapestry-csrf-protection.git</developerConnection>
+		<connection>scm:git:http://github.com/porscheinformatik/tapestry-csrf-protection.git</connection>
+		<developerConnection>scm:git:http://github.com/porscheinformatik/tapestry-csrf-protection.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
