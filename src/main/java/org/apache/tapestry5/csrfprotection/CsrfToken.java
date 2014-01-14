@@ -9,6 +9,15 @@ package org.apache.tapestry5.csrfprotection;
 public interface CsrfToken
 {
     /**
+     * Gets the HTTP header that the CSRF is populated on the response and can
+     * be placed on requests instead of the parameter. Cannot be null.
+     *
+     * @return the HTTP header that the CSRF is populated on the response and
+     *         can be placed on requests instead of the parameter
+     */
+    String getHeaderName();
+
+    /**
      * Gets the HTTP parameter name that should contain the token. Cannot be null.
      * 
      * @return the HTTP parameter name that should contain the token.

@@ -2,26 +2,43 @@ package org.apache.tapestry5.csrfprotection.internal;
 
 import org.apache.tapestry5.csrfprotection.CsrfToken;
 
+/**
+ * Default {@link CsrfToken} implementation.
+ */
 public class DefaultCsrfToken implements CsrfToken
 {
-    private final String token;
+    private final String headerName;
 
     private final String parameterName;
 
-    public DefaultCsrfToken(String token, String parameterName)
+    private final String token;
+
+    /**
+     * Creates a new instance.
+     * 
+     * @param headerName the HTTP header name to use
+     * @param parameterName the HTTP parameter name to use
+     * @param token the value of the token (i.e. expected value of the HTTP parameter of parametername).
+     */
+    public DefaultCsrfToken(String headerName, String parameterName, String token)
     {
-        super();
-        this.token = token;
+        this.headerName = headerName;
         this.parameterName = parameterName;
+        this.token = token;
     }
 
-    public String getToken()
+    public String getHeaderName()
     {
-        return token;
+        return headerName;
     }
 
     public String getParameterName()
     {
         return parameterName;
+    }
+
+    public String getToken()
+    {
+        return token;
     }
 }

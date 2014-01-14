@@ -22,15 +22,12 @@ public interface CsrfTokenRepository
      * {@link CsrfToken} is null, it is the same as deleting it.
      * 
      * @param token the {@link CsrfToken} to save or null to delete
-     * @param request the {@link HttpServletRequest} to use
-     * @param response the {@link HttpServletResponse} to use
      */
     void saveToken(CsrfToken token);
 
     /**
      * Loads the expected {@link CsrfToken} from the {@link HttpServletRequest}
      * 
-     * @param request the {@link HttpServletRequest} to use
      * @return the {@link CsrfToken} or null if none exists
      */
     CsrfToken loadToken();

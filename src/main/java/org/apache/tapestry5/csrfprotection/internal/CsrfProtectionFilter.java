@@ -43,6 +43,7 @@ public class CsrfProtectionFilter implements ComponentEventRequestFilter
      * @param handler .
      * @throws IOException when delegate throws
      */
+    @Override
     public void handle(ComponentEventRequestParameters parameters, ComponentEventRequestHandler handler)
         throws IOException
     {

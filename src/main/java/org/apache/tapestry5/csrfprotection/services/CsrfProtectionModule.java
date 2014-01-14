@@ -7,8 +7,11 @@ import org.apache.tapestry5.csrfprotection.internal.CsrfProtectionFilter;
 import org.apache.tapestry5.csrfprotection.internal.CsrfTokenManager;
 import org.apache.tapestry5.csrfprotection.internal.ProtectedPagesService;
 import org.apache.tapestry5.csrfprotection.internal.SessionCsrfTokenRepository;
+import org.apache.tapestry5.csrfprotection.internal.SpringContextHelper;
+import org.apache.tapestry5.csrfprotection.internal.SpringCsrfTokenRepository;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
@@ -26,12 +29,25 @@ public class CsrfProtectionModule
     {
         binder.bind(CsrfTokenManager.class);
         binder.bind(ProtectedPagesService.class);
-        binder.bind(CsrfTokenRepository.class, SessionCsrfTokenRepository.class);
     }
 
     public static void contributeComponentClassResolver(Configuration<LibraryMapping> configuration)
     {
         configuration.add(new LibraryMapping("csrf", "org.apache.tapestry5.csrfprotection"));
+    }
+
+    public static CsrfTokenRepository buildCsrfTokenRepository(ObjectLocator objectLocator)
+    {
+        // check if spring is there and if CsrfTokenRepository is registered
+        if (SpringContextHelper.getSpringBean(objectLocator,
+            "org.springframework.security.web.csrf.CsrfTokenRepository") != null)
+        {
+            return objectLocator.proxy(CsrfTokenRepository.class, SpringCsrfTokenRepository.class);
+        }
+        else
+        {
+            return objectLocator.proxy(CsrfTokenRepository.class, SessionCsrfTokenRepository.class);
+        }
     }
 
     @Contribute(ComponentEventLinkTransformer.class)

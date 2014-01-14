@@ -53,6 +53,7 @@ public class CsrfHidden implements ClientElement
         return false;
     }
 
+    @Override
     public String getClientId()
     {
         if (clientId == null)

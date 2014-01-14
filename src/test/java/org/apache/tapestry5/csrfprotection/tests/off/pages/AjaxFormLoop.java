@@ -18,7 +18,7 @@ public class AjaxFormLoop
     private List<TestBean> myList;
 
     @Property
-    private TestBean _testBean;
+    private TestBean testBean;
 
     @SuppressWarnings("rawtypes")
     public ValueEncoder getEncoder()

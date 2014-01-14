@@ -9,5 +9,4 @@ public enum CsrfProtectionMode
     OFF,
     /** activate auto CSRF protection - for all pages and all components */
     AUTO;
-    // TODO check if explicit mode is needed
 }
