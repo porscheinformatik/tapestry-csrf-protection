@@ -2,10 +2,11 @@ package org.apache.tapestry5.csrfprotection.internal;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.tapestry5.services.ComponentEventRequestFilter;
 import org.apache.tapestry5.services.ComponentEventRequestHandler;
 import org.apache.tapestry5.services.ComponentEventRequestParameters;
-import org.apache.tapestry5.services.Request;
 
 /**
  * This filter checks each component event request or page render request for cross-site request forgery attacks. If a
@@ -15,7 +16,7 @@ import org.apache.tapestry5.services.Request;
 public class CsrfProtectionFilter implements ComponentEventRequestFilter
 {
     private final CsrfTokenManager csrfTokenManager;
-    private final Request request;
+    private final HttpServletRequest request;
     private final ProtectedPagesService protectedPagesService;
 
     /**
@@ -28,7 +29,7 @@ public class CsrfProtectionFilter implements ComponentEventRequestFilter
     public CsrfProtectionFilter(
         CsrfTokenManager csrfTokenManager,
         ProtectedPagesService protectedPagesService,
-        Request request)
+        HttpServletRequest request)
     {
         super();
         this.csrfTokenManager = csrfTokenManager;

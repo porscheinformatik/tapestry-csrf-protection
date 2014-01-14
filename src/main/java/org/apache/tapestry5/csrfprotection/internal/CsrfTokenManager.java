@@ -2,12 +2,14 @@ package org.apache.tapestry5.csrfprotection.internal;
 
 import static org.apache.tapestry5.csrfprotection.CsrfConstants.CSRF_TOKEN_PARAMETER_NAME;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.tapestry5.csrfprotection.CsrfConstants;
 import org.apache.tapestry5.csrfprotection.CsrfException;
 import org.apache.tapestry5.csrfprotection.CsrfToken;
 import org.apache.tapestry5.csrfprotection.services.CsrfTokenRepository;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.services.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +60,7 @@ public class CsrfTokenManager
      * @param request .
      * @throws CsrfException when token not there or token does not match
      */
-    public void checkToken(Request request)
+    public void checkToken(HttpServletRequest request)
         throws CsrfException
     {
         String requestParam = request.getParameter(parameterName);
@@ -71,6 +73,14 @@ public class CsrfTokenManager
 
         if (serverToken == null || !serverToken.getToken().equals(requestParam))
         {
+            // check if session id changed - if yes Spring Security (or another security framework) 
+            // requested a new session after login
+            HttpSession session = request.getSession(false);
+            if (session != null && !session.getId().equals(request.getRequestedSessionId()))
+            {
+                return;
+            }
+
             LOGGER.warn("CSRF Attack detected. Server-Token: {}  vs. Client-Token: {}",
                 serverToken, requestParam);
 
