@@ -1,8 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="csrfprotection Application Test Suite" annotations="1.5">
-	<test name="Unit Tests">
+	<test name="Auto Tests">
 		<packages>
-			<package name="org.apache.tapestry.csrfprotection" />
+			<package name="org.apache.tapestry5.csrfprotection.tests.auto" />
+		</packages>
+	</test>
+	<test name="Off Tests">
+		<packages>
+			<package name="org.apache.tapestry5.csrfprotection.tests.off" />
 		</packages>
 	</test>
 </suite>
