@@ -1,8 +1,9 @@
 package org.apache.tapestry5.csrfprotection.tests.off;
 
+import static org.apache.tapestry5.csrfprotection.CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME;
+
 import java.util.List;
 
-import org.apache.tapestry5.csrfprotection.CsrfConstants;
 import org.apache.tapestry5.csrfprotection.services.CsrfProtectionModule;
 import org.apache.tapestry5.csrfprotection.tests.off.services.AppModule;
 import org.apache.tapestry5.dom.Document;
@@ -39,7 +40,7 @@ public class LinkTest extends Assert
                 String href = elem.getAttribute("href");
                 if (href.contains("actionlink") || href.contains("event"))
                 {
-                    if (href.contains(CsrfConstants.TOKEN_NAME))
+                    if (href.contains(DEFAULT_CSRF_TOKEN_PARAMETER_NAME))
                     {
                         fail("Cross-site request forgery should not be present!");
                     }

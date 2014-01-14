@@ -43,7 +43,7 @@ public class BeanEditFormTest extends Assert
             {
                 if (elem.getAttribute("name") != null
                     && elem.getAttribute("name").equals(
-                        CsrfConstants.TOKEN_NAME))
+                        CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME))
                 {
                     found = true;
                 }

@@ -1,10 +1,11 @@
 package org.apache.tapestry5.csrfprotection.tests.off;
 
+import static org.apache.tapestry5.csrfprotection.CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.tapestry5.csrfprotection.CsrfConstants;
 import org.apache.tapestry5.csrfprotection.services.CsrfProtectionModule;
 import org.apache.tapestry5.csrfprotection.tests.off.services.AppModule;
 import org.apache.tapestry5.dom.Element;
@@ -43,7 +44,7 @@ public class BeanEditFormTest extends Assert
             {
                 if (elem.getAttribute("name") != null
                     && elem.getAttribute("name").equals(
-                        CsrfConstants.TOKEN_NAME))
+                        DEFAULT_CSRF_TOKEN_PARAMETER_NAME))
                 {
                     found = true;
                 }

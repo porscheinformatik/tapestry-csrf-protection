@@ -1,10 +1,11 @@
 package org.apache.tapestry5.csrfprotection.tests.auto;
 
+import static org.apache.tapestry5.csrfprotection.CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.tapestry5.csrfprotection.CsrfConstants;
 import org.apache.tapestry5.csrfprotection.services.CsrfProtectionModule;
 import org.apache.tapestry5.csrfprotection.tests.auto.services.AppModule;
 import org.apache.tapestry5.dom.Element;
@@ -40,7 +41,7 @@ public class FormTest extends Assert
 
             for (Element elem : selectElements)
             {
-                if (elem.getAttribute("name") != null && elem.getAttribute("name").equals(CsrfConstants.TOKEN_NAME))
+                if (elem.getAttribute("name") != null && elem.getAttribute("name").equals(DEFAULT_CSRF_TOKEN_PARAMETER_NAME))
                 {
                     found = true;
                 }

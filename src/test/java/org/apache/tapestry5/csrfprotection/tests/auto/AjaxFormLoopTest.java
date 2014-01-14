@@ -35,12 +35,12 @@ public class AjaxFormLoopTest extends Assert
         org.apache.tapestry5.dom.Document doc = tester.renderPage("AjaxFormLoop");
         // simple test, just checking if the event link rendered in javascript contains the anti CSRF token
         assertTrue(
-            doc.toString().contains("/foo/ajaxformloop.ajaxformloop:triggerremoverow/bla?" + CsrfConstants.TOKEN_NAME),
+            doc.toString().contains("/foo/ajaxformloop.ajaxformloop:triggerremoverow/bla?" + CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME),
             "The antiCsrfToken parameter is not present for the event link rendered in JavaScript by the RemoveRowLink component.");
 
         // the link created by the AddRowLink component should also contain the anti CSRF token
         assertTrue(
-            doc.toString().contains("/foo/ajaxformloop.ajaxformloop.rowinjector:inject?" + CsrfConstants.TOKEN_NAME),
+            doc.toString().contains("/foo/ajaxformloop.ajaxformloop.rowinjector:inject?" + CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME),
             "The antiCsrfToken parameter is not present for the event link rendered in JavaScript by the AddRowLink component.");
     }
 
@@ -66,15 +66,15 @@ public class AjaxFormLoopTest extends Assert
         Element element = dummyLinkElements.get(0);
         String token =
             element.getAttribute("href").substring(
-                element.getAttribute("href").indexOf(CsrfConstants.TOKEN_NAME)
-                    + (CsrfConstants.TOKEN_NAME + "=").length());
+                element.getAttribute("href").indexOf(CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME)
+                    + (CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME + "=").length());
 
         List<Element> selectElements = TapestryXPath.xpath("id('removeRowLink')").selectElements(doc);
         assertTrue(selectElements.size() == 1, "There should be only one remove row link.");
 
         Element removeRowLink = selectElements.get(0);
         String href = removeRowLink.getAttribute("href");
-        href += "?" + CsrfConstants.TOKEN_NAME + "=" + token;
+        href += "?" + CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME + "=" + token;
         removeRowLink.attribute("href", href);
         Document response = tester.clickLink(removeRowLink);
 

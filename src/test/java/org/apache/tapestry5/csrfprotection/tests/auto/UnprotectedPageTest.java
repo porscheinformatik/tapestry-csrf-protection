@@ -1,8 +1,9 @@
 package org.apache.tapestry5.csrfprotection.tests.auto;
 
+import static org.apache.tapestry5.csrfprotection.CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME;
+
 import java.util.List;
 
-import org.apache.tapestry5.csrfprotection.CsrfConstants;
 import org.apache.tapestry5.csrfprotection.services.CsrfProtectionModule;
 import org.apache.tapestry5.csrfprotection.tests.auto.services.AppModule;
 import org.apache.tapestry5.dom.Document;
@@ -34,7 +35,7 @@ public class UnprotectedPageTest extends Assert
             AppModule.class);
 
         org.apache.tapestry5.dom.Document doc = tester.renderPage("Unprotected");
-        assertFalse(doc.toString().contains(CsrfConstants.TOKEN_NAME), "The anti CSRF token should not be present.");
+        assertFalse(doc.toString().contains(DEFAULT_CSRF_TOKEN_PARAMETER_NAME), "The anti CSRF token should not be present.");
     }
 
     /**

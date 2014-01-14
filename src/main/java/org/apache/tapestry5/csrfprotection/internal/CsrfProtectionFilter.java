@@ -2,7 +2,6 @@ package org.apache.tapestry5.csrfprotection.internal;
 
 import java.io.IOException;
 
-import org.apache.tapestry5.services.ApplicationStateManager;
 import org.apache.tapestry5.services.ComponentEventRequestFilter;
 import org.apache.tapestry5.services.ComponentEventRequestHandler;
 import org.apache.tapestry5.services.ComponentEventRequestParameters;
@@ -15,34 +14,33 @@ import org.apache.tapestry5.services.Request;
  */
 public class CsrfProtectionFilter implements ComponentEventRequestFilter
 {
-    private final ApplicationStateManager applicationStateManager;
+    private final CsrfTokenManager csrfTokenManager;
     private final Request request;
     private final ProtectedPagesService protectedPagesService;
 
     /**
      * Creates a new filter and injects the required services and configuration parameters.
      * 
-     * @param applicationStateManager .
+     * @param csrfTokenManager .
      * @param protectedPagesService .
      * @param request .
      */
     public CsrfProtectionFilter(
-        ApplicationStateManager applicationStateManager,
+        CsrfTokenManager csrfTokenManager,
         ProtectedPagesService protectedPagesService,
         Request request)
     {
         super();
-        this.applicationStateManager = applicationStateManager;
+        this.csrfTokenManager = csrfTokenManager;
         this.protectedPagesService = protectedPagesService;
         this.request = request;
     }
 
     /**
      * Handles a component event request and evaluates the cross-site request forgery protection.
-     *
+     * 
      * @param parameters .
      * @param handler .
-     * 
      * @throws IOException when delegate throws
      */
     public void handle(ComponentEventRequestParameters parameters, ComponentEventRequestHandler handler)
@@ -50,7 +48,7 @@ public class CsrfProtectionFilter implements ComponentEventRequestFilter
     {
         if (protectedPagesService.isPageProtected(parameters))
         {
-            CsrfTokenProvider.checkToken(request, applicationStateManager);
+            csrfTokenManager.checkToken(request);
         }
 
         handler.handle(parameters);

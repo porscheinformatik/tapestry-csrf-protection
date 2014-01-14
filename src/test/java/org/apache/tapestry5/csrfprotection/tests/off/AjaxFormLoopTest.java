@@ -1,8 +1,9 @@
 package org.apache.tapestry5.csrfprotection.tests.off;
 
+import static org.apache.tapestry5.csrfprotection.CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME;
+
 import java.util.List;
 
-import org.apache.tapestry5.csrfprotection.CsrfConstants;
 import org.apache.tapestry5.csrfprotection.services.CsrfProtectionModule;
 import org.apache.tapestry5.csrfprotection.tests.off.services.AppModule;
 import org.apache.tapestry5.dom.Document;
@@ -62,15 +63,15 @@ public class AjaxFormLoopTest extends Assert
             Element element = dummyLinkElements.get(0);
             String token =
                 element.getAttribute("href").substring(
-                    element.getAttribute("href").indexOf(CsrfConstants.TOKEN_NAME)
-                        + (CsrfConstants.TOKEN_NAME + "=").length());
+                    element.getAttribute("href").indexOf(DEFAULT_CSRF_TOKEN_PARAMETER_NAME)
+                        + (DEFAULT_CSRF_TOKEN_PARAMETER_NAME + "=").length());
 
             List<Element> selectElements = TapestryXPath.xpath("id('removeRowLink')").selectElements(doc);
             assertTrue(selectElements.size() == 1, "There should be only one remove row link.");
 
             Element removeRowLink = selectElements.get(0);
             String href = removeRowLink.getAttribute("href");
-            href += "?" + CsrfConstants.TOKEN_NAME + "=" + token;
+            href += "?" + DEFAULT_CSRF_TOKEN_PARAMETER_NAME + "=" + token;
             removeRowLink.attribute("href", href);
             Document response = tester.clickLink(removeRowLink);
 
