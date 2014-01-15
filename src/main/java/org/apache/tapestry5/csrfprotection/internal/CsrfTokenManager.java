@@ -10,6 +10,7 @@ import org.apache.tapestry5.csrfprotection.CsrfException;
 import org.apache.tapestry5.csrfprotection.CsrfToken;
 import org.apache.tapestry5.csrfprotection.services.CsrfTokenRepository;
 import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.services.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,12 +29,13 @@ public class CsrfTokenManager
     /**
      * Initializes the secure token that will stay the same for the whole life cycle of this instance.
      * 
-     * @param tokenProvider an implementation of {@link CsrfTokenRepository}
+     * @param tokenRepository an implementation of {@link CsrfTokenRepository}
      * @param parameterName symbol {@link CsrfConstants#CSRF_TOKEN_PARAMETER_NAME}
      */
-    public CsrfTokenManager(CsrfTokenRepository tokenProvider, @Symbol(CSRF_TOKEN_PARAMETER_NAME) String parameterName)
+    public CsrfTokenManager(CsrfTokenRepository tokenRepository, 
+        @Symbol(CSRF_TOKEN_PARAMETER_NAME) String parameterName)
     {
-        this.tokenRepository = tokenProvider;
+        this.tokenRepository = tokenRepository;
         this.parameterName = parameterName;
     }
 
@@ -58,9 +60,10 @@ public class CsrfTokenManager
      * current server-side token by accessing the CsrfTokenProvider instance assigned in this session.
      * 
      * @param request .
+     * @param httpServletRequest .
      * @throws CsrfException when token not there or token does not match
      */
-    public void checkToken(HttpServletRequest request)
+    public void checkToken(Request request, HttpServletRequest httpServletRequest)
         throws CsrfException
     {
         String requestParam = request.getParameter(parameterName);
@@ -75,8 +78,8 @@ public class CsrfTokenManager
         {
             // check if session id changed - if yes Spring Security (or another security framework) 
             // requested a new session after login
-            HttpSession session = request.getSession(false);
-            if (session != null && !session.getId().equals(request.getRequestedSessionId()))
+            HttpSession session = httpServletRequest.getSession(false);
+            if (session != null && session.isNew())
             {
                 return;
             }

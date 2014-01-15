@@ -1,7 +1,6 @@
 package org.apache.tapestry5.csrfprotection.internal;
 
 import org.apache.tapestry5.ioc.ObjectLocator;
-import org.apache.tapestry5.ioc.internal.util.TapestryException;
 import org.springframework.context.ApplicationContext;
 
 /**

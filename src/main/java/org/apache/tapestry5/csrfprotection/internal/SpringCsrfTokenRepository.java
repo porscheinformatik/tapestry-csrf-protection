@@ -54,7 +54,7 @@ public class SpringCsrfTokenRepository implements CsrfTokenRepository
 
     private static CsrfToken mapToken(org.springframework.security.web.csrf.CsrfToken springToken)
     {
-        return springToken == null ? null : new DefaultCsrfToken(springToken.getParameterName(),
+        return springToken == null ? null : new DefaultCsrfToken(springToken.getHeaderName(),
             springToken.getParameterName(),
             springToken.getToken());
     }

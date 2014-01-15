@@ -12,7 +12,9 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
- * Hidden field containing the CSRF token.
+ * Hidden field containing the CSRF token to integrate with other frameworks (e.g. Spring Security).
+ * <p>
+ * HINT: this field is not necessary if you are posting to a Tapestry form.
  */
 @SupportsInformalParameters
 public class CsrfHidden implements ClientElement

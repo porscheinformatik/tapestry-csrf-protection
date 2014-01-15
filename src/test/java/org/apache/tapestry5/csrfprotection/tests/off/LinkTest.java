@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.tapestry5.csrfprotection.services.CsrfProtectionModule;
 import org.apache.tapestry5.csrfprotection.tests.off.services.AppModule;
+import org.apache.tapestry5.csrfprotection.util.PageTesterUtils;
 import org.apache.tapestry5.dom.Document;
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.dom.Text;
@@ -24,11 +25,7 @@ public class LinkTest extends Assert
     @Test
     public void testForTokenPresentAutoMode() throws JaxenException
     {
-        String appPackage = "org.apache.tapestry5.csrfprotection.tests.off";
-        String appName = "OffMode";
-        PageTester tester = new PageTester(appPackage, appName,
-            "src/test/webapp", CsrfProtectionModule.class,
-            AppModule.class);
+        PageTester tester = PageTesterUtils.offModePageTester();
 
         org.apache.tapestry5.dom.Document doc = tester.renderPage("Links");
 
@@ -55,11 +52,7 @@ public class LinkTest extends Assert
     @Test
     public void testActionLink() throws JaxenException
     {
-        String appPackage = "org.apache.tapestry5.csrfprotection.tests.off";
-        String appName = "OffMode";
-        PageTester tester = new PageTester(appPackage, appName,
-            "src/test/webapp", CsrfProtectionModule.class,
-            AppModule.class);
+        PageTester tester = PageTesterUtils.offModePageTester();
 
         org.apache.tapestry5.dom.Document doc = tester.renderPage("Links");
 

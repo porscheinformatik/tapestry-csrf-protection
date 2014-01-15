@@ -4,8 +4,7 @@ import static org.apache.tapestry5.csrfprotection.CsrfConstants.DEFAULT_CSRF_TOK
 
 import java.util.List;
 
-import org.apache.tapestry5.csrfprotection.services.CsrfProtectionModule;
-import org.apache.tapestry5.csrfprotection.tests.auto.services.AppModule;
+import org.apache.tapestry5.csrfprotection.util.PageTesterUtils;
 import org.apache.tapestry5.dom.Document;
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.dom.Text;
@@ -28,87 +27,57 @@ public class UnprotectedPageTest extends Assert
     @Test
     public void testForTokenPresent()
     {
-        String appPackage = "org.apache.tapestry5.csrfprotection.tests.auto";
-        String appName = "AutoMode";
-        PageTester tester = new PageTester(appPackage, appName,
-            "src/test/webapp", CsrfProtectionModule.class,
-            AppModule.class);
+        PageTester tester = PageTesterUtils.autoModePageTester();
 
         org.apache.tapestry5.dom.Document doc = tester.renderPage("Unprotected");
-        assertFalse(doc.toString().contains(DEFAULT_CSRF_TOKEN_PARAMETER_NAME), "The anti CSRF token should not be present.");
+        assertFalse(doc.toString().contains(DEFAULT_CSRF_TOKEN_PARAMETER_NAME),
+            "The anti CSRF token should not be present.");
     }
 
     /**
      * The action link should still work.
      */
     @Test
-    public void testActionLink()
+    public void testActionLink() throws JaxenException
     {
-        String appPackage = "org.apache.tapestry5.csrfprotection.tests.auto";
-        String appName = "AutoMode";
-        PageTester tester = new PageTester(appPackage, appName,
-            "src/test/webapp", CsrfProtectionModule.class,
-            AppModule.class);
+        PageTester tester = PageTesterUtils.autoModePageTester();
 
         org.apache.tapestry5.dom.Document doc = tester.renderPage("Unprotected");
 
-        List<Element> list;
-        try
-        {
-            list = TapestryXPath.xpath("id('actionLink')").selectElements(doc);
-            assertTrue(list.size() == 1, "There should be only one link with id actionLink");
-            Element actionLink = list.get(0);
-            Document response = tester.clickLink(actionLink);
-            List<Element> selectElements = TapestryXPath.xpath("//dd[@class='testProperty']").selectElements(response);
-            assertTrue(selectElements.size() == 1,
-                "There should be only one dd element with attribute class equal testProperty");
-            Element element = selectElements.get(0);
-            Text text = (Text) element.getChildren().get(0);
-            assertTrue(text.toString().equals("onAction!"),
-                "Text that is set by the actionLink is not present! The actionLink component is not working properly");
-
-        }
-        catch (JaxenException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        List<Element> list = TapestryXPath.xpath("id('actionLink')").selectElements(doc);
+        assertTrue(list.size() == 1, "There should be only one link with id actionLink");
+        Element actionLink = list.get(0);
+        Document response = tester.clickLink(actionLink);
+        List<Element> selectElements = TapestryXPath.xpath("//dd[@class='testProperty']").selectElements(response);
+        assertTrue(selectElements.size() == 1,
+            "There should be only one dd element with attribute class equal testProperty");
+        Element element = selectElements.get(0);
+        Text text = (Text) element.getChildren().get(0);
+        assertTrue(text.toString().equals("onAction!"),
+            "Text that is set by the actionLink is not present! The actionLink component is not working properly");
     }
 
     /**
      * The event link should work.
      */
     @Test
-    public void testEventLink()
+    public void testEventLink() throws JaxenException
     {
-        String appPackage = "org.apache.tapestry5.csrfprotection.tests.auto";
-        String appName = "AutoMode";
-        PageTester tester = new PageTester(appPackage, appName,
-            "src/test/webapp", CsrfProtectionModule.class,
-            AppModule.class);
+        PageTester tester = PageTesterUtils.autoModePageTester();
 
         org.apache.tapestry5.dom.Document doc = tester.renderPage("Unprotected");
 
-        List<Element> list;
-        try
-        {
-            list = TapestryXPath.xpath("id('eventLink1')").selectElements(doc);
-            assertTrue(list.size() == 1, "There should be only one link with id eventLink1");
-            Element actionLink = list.get(0);
-            Document response = tester.clickLink(actionLink);
-            List<Element> selectElements = TapestryXPath.xpath("//dd[@class='testProperty']").selectElements(response);
-            assertTrue(selectElements.size() == 1,
-                "There should be only one dd element with attribute class equal testProperty");
-            Element element = selectElements.get(0);
-            Text text = (Text) element.getChildren().get(0);
-            assertTrue(text.toString().equals("onEvent!"),
-                "Text that is set by the eventLink is not present! The eventLink component is not working properly");
+        List<Element> list = TapestryXPath.xpath("id('eventLink1')").selectElements(doc);
+        assertTrue(list.size() == 1, "There should be only one link with id eventLink1");
+        Element actionLink = list.get(0);
+        Document response = tester.clickLink(actionLink);
+        List<Element> selectElements = TapestryXPath.xpath("//dd[@class='testProperty']").selectElements(response);
+        assertTrue(selectElements.size() == 1,
+            "There should be only one dd element with attribute class equal testProperty");
+        Element element = selectElements.get(0);
+        Text text = (Text) element.getChildren().get(0);
+        assertTrue(text.toString().equals("onEvent!"),
+            "Text that is set by the eventLink is not present! The eventLink component is not working properly");
 
-        }
-        catch (JaxenException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 }

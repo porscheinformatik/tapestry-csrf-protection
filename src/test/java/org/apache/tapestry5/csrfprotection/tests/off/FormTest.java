@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.tapestry5.csrfprotection.services.CsrfProtectionModule;
 import org.apache.tapestry5.csrfprotection.tests.off.services.AppModule;
+import org.apache.tapestry5.csrfprotection.util.PageTesterUtils;
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.test.PageTester;
 import org.jaxen.JaxenException;
@@ -23,45 +24,38 @@ public class FormTest extends Assert
 {
     /**
      * A page that contains a form is tested. It should not contain the CSRF protection token.
+     * 
+     * @throws JaxenException .
      */
     @Test
-    public void testForTokenNotPresent()
+    public void testForTokenNotPresent() throws JaxenException
     {
-        String appPackage = "org.apache.tapestry5.csrfprotection.tests.off";
-        String appName = "OffMode";
-        PageTester tester =
-            new PageTester(appPackage, appName, "src/main/webapp", CsrfProtectionModule.class, AppModule.class);
+        PageTester tester = PageTesterUtils.offModePageTester();
 
         org.apache.tapestry5.dom.Document doc = tester.renderPage("Form");
-        try
-        {
-            List<Element> selectElements = TapestryXPath.xpath("id('messageForm')//input").selectElements(doc);
-            boolean found = false;
+        List<Element> selectElements = TapestryXPath.xpath("id('messageForm')//input").selectElements(doc);
+        boolean found = false;
 
-            for (Element elem : selectElements)
+        for (Element elem : selectElements)
+        {
+            if (elem.getAttribute("name") != null
+                && elem.getAttribute("name").equals(DEFAULT_CSRF_TOKEN_PARAMETER_NAME))
             {
-                if (elem.getAttribute("name") != null && elem.getAttribute("name").equals(DEFAULT_CSRF_TOKEN_PARAMETER_NAME))
-                {
-                    found = true;
-                }
-            }
-            if (found)
-            {
-                fail("Cross-site request forgery token should not be present");
+                found = true;
             }
         }
-        catch (JaxenException e)
+        if (found)
         {
-            // TODO Auto-generated catch block
-            fail("JaxenException", e);
+            fail("Cross-site request forgery token should not be present");
         }
     }
 
     /**
      * Base functionality of the form component should still work.
+     * @throws JaxenException .
      */
     @Test
-    public void testSubmitForm()
+    public void testSubmitForm() throws JaxenException
     {
         String appPackage = "org.apache.tapestry5.csrfprotection.tests.off";
         String appName = "OffMode";
@@ -74,17 +68,10 @@ public class FormTest extends Assert
         String updateValue = "udpatedValue";
         test.put("message", updateValue);
         doc = tester.submitForm(form, test);
-        try
-        {
-            List<Element> elements = TapestryXPath.xpath("id('message')").selectElements(doc);
-            assertTrue(elements.size() == 1, "There should be only one input with id testProperty in the response.");
-            String newValue = elements.get(0).getAttribute("value");
-            assertTrue(newValue.equals(updateValue), "The submitted change was not updated!");
-        }
-        catch (JaxenException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+
+        List<Element> elements = TapestryXPath.xpath("id('message')").selectElements(doc);
+        assertTrue(elements.size() == 1, "There should be only one input with id testProperty in the response.");
+        String newValue = elements.get(0).getAttribute("value");
+        assertTrue(newValue.equals(updateValue), "The submitted change was not updated!");
     }
 }

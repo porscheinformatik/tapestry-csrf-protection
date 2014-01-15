@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.tapestry5.csrfprotection.services.CsrfProtectionModule;
-import org.apache.tapestry5.csrfprotection.tests.off.services.AppModule;
+import org.apache.tapestry5.csrfprotection.util.PageTesterUtils;
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.test.PageTester;
 import org.jaxen.JaxenException;
@@ -21,77 +20,53 @@ import com.formos.tapestry.xpath.TapestryXPath;
  */
 public class BeanEditFormTest extends Assert
 {
-    @Test
     /**
      * A page that contains a form is tested. It should not contain the CSRF protection token in the off mode.
+     * 
+     * @throws JaxenException .
      */
-    public void testForTokenNotPresent()
+    @Test
+    public void testForTokenNotPresent() throws JaxenException
     {
-        String appPackage = "org.apache.tapestry5.csrfprotection.tests.off";
-        String appName = "OffMode";
+        PageTester tester = PageTesterUtils.offModePageTester();
 
-        PageTester tester =
-            new PageTester(appPackage, appName, "src/main/webapp", CsrfProtectionModule.class, AppModule.class);
-
-        org.apache.tapestry5.dom.Document doc = tester
-            .renderPage("BeanEditForm");
-        try
+        org.apache.tapestry5.dom.Document doc = tester.renderPage("BeanEditForm");
+        List<Element> selectElements = TapestryXPath.xpath("id('form')//input").selectElements(doc);
+        boolean found = false;
+        for (Element elem : selectElements)
         {
-            List<Element> selectElements = TapestryXPath.xpath(
-                "id('form')//input").selectElements(doc);
-            boolean found = false;
-            for (Element elem : selectElements)
+            if (elem.getAttribute("name") != null
+                && elem.getAttribute("name").equals(
+                    DEFAULT_CSRF_TOKEN_PARAMETER_NAME))
             {
-                if (elem.getAttribute("name") != null
-                    && elem.getAttribute("name").equals(
-                        DEFAULT_CSRF_TOKEN_PARAMETER_NAME))
-                {
-                    found = true;
-                }
+                found = true;
             }
-            if (found)
-            {
-                fail("Cross-site request forgery token should not be present");
-            }
-
         }
-        catch (JaxenException e)
+        if (found)
         {
-            // TODO Auto-generated catch block
-            fail("JaxenException", e);
+            fail("Cross-site request forgery token should not be present");
         }
     }
 
-    @Test
     /**
      * A page that contains a form is tested. A submit of the form should be possible without any problem.
+     * 
+     * @throws JaxenException .
      */
-    public void testSumbit()
+    @Test
+    public void testSumbit() throws JaxenException
     {
-        String appPackage = "org.apache.tapestry5.csrfprotection.tests.off";
-        String appName = "OffMode";
+        PageTester tester = PageTesterUtils.offModePageTester();
 
-        PageTester tester =
-            new PageTester(appPackage, appName, "src/main/webapp", CsrfProtectionModule.class, AppModule.class);
-
-        org.apache.tapestry5.dom.Document doc = tester
-            .renderPage("BeanEditForm");
+        org.apache.tapestry5.dom.Document doc = tester.renderPage("BeanEditForm");
         Element form = doc.getElementById("form");
         Map<String, String> test = new HashMap<String, String>();
         String updateValue = "udpatedValue";
         test.put("testProperty", updateValue);
         doc = tester.submitForm(form, test);
-        try
-        {
-            List<Element> elements = TapestryXPath.xpath("id('testProperty')").selectElements(doc);
-            assertTrue(elements.size() == 1, "There should be only one input with id testProperty in the response.");
-            String newValue = elements.get(0).getAttribute("value");
-            assertTrue(newValue.equals(updateValue), "The submitted change was not updated!");
-        }
-        catch (JaxenException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        List<Element> elements = TapestryXPath.xpath("id('testProperty')").selectElements(doc);
+        assertTrue(elements.size() == 1, "There should be only one input with id testProperty in the response.");
+        String newValue = elements.get(0).getAttribute("value");
+        assertTrue(newValue.equals(updateValue), "The submitted change was not updated!");
     }
 }

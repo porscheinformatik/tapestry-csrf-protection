@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.tapestry5.services.ComponentEventRequestFilter;
 import org.apache.tapestry5.services.ComponentEventRequestHandler;
 import org.apache.tapestry5.services.ComponentEventRequestParameters;
+import org.apache.tapestry5.services.Request;
 
 /**
  * This filter checks each component event request or page render request for cross-site request forgery attacks. If a
@@ -16,8 +17,9 @@ import org.apache.tapestry5.services.ComponentEventRequestParameters;
 public class CsrfProtectionFilter implements ComponentEventRequestFilter
 {
     private final CsrfTokenManager csrfTokenManager;
-    private final HttpServletRequest request;
     private final ProtectedPagesService protectedPagesService;
+    private final Request request;
+    private final HttpServletRequest httpServletRequest;
 
     /**
      * Creates a new filter and injects the required services and configuration parameters.
@@ -25,16 +27,18 @@ public class CsrfProtectionFilter implements ComponentEventRequestFilter
      * @param csrfTokenManager .
      * @param protectedPagesService .
      * @param request .
+     * @param httpServletRequest .
      */
     public CsrfProtectionFilter(
         CsrfTokenManager csrfTokenManager,
         ProtectedPagesService protectedPagesService,
-        HttpServletRequest request)
+        Request request, HttpServletRequest httpServletRequest)
     {
         super();
         this.csrfTokenManager = csrfTokenManager;
         this.protectedPagesService = protectedPagesService;
         this.request = request;
+        this.httpServletRequest = httpServletRequest;
     }
 
     /**
@@ -50,7 +54,7 @@ public class CsrfProtectionFilter implements ComponentEventRequestFilter
     {
         if (protectedPagesService.isPageProtected(parameters))
         {
-            csrfTokenManager.checkToken(request);
+            csrfTokenManager.checkToken(request, httpServletRequest);
         }
 
         handler.handle(parameters);

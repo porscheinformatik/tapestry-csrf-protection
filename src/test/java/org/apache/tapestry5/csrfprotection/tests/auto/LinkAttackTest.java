@@ -2,8 +2,7 @@ package org.apache.tapestry5.csrfprotection.tests.auto;
 
 import java.util.List;
 
-import org.apache.tapestry5.csrfprotection.services.CsrfProtectionModule;
-import org.apache.tapestry5.csrfprotection.tests.auto.services.AppModule;
+import org.apache.tapestry5.csrfprotection.util.PageTesterUtils;
 import org.apache.tapestry5.dom.Document;
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.test.PageTester;
@@ -24,11 +23,7 @@ public class LinkAttackTest extends Assert
     @Test
     public void testAttackEventLink() throws JaxenException
     {
-        String appPackage = "org.apache.tapestry5.csrfprotection.tests.auto";
-        String appName = "AutoMode";
-        PageTester tester = new PageTester(appPackage, appName,
-            "src/test/webapp", CsrfProtectionModule.class,
-            AppModule.class);
+        PageTester tester = PageTesterUtils.autoModePageTester();
 
         org.apache.tapestry5.dom.Document doc = tester.renderPage("LinksAttack");
         List<Element> list;
@@ -45,11 +40,7 @@ public class LinkAttackTest extends Assert
     @Test
     public void testAttackActionLink() throws JaxenException
     {
-        String appPackage = "org.apache.tapestry5.csrfprotection.tests.auto";
-        String appName = "AutoMode";
-        PageTester tester = new PageTester(appPackage, appName,
-            "src/test/webapp", CsrfProtectionModule.class,
-            AppModule.class);
+        PageTester tester = PageTesterUtils.autoModePageTester();
 
         org.apache.tapestry5.dom.Document doc = tester.renderPage("LinksAttack");
         List<Element> list;
