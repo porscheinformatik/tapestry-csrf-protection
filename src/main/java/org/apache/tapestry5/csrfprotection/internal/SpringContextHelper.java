@@ -1,6 +1,7 @@
 package org.apache.tapestry5.csrfprotection.internal;
 
 import org.apache.tapestry5.ioc.ObjectLocator;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -45,6 +46,13 @@ public final class SpringContextHelper
             return null;
         }
 
-        return applicationContext.getBean(beanTypeClass);
+        try
+        {
+            return applicationContext.getBean(beanTypeClass);
+        }
+        catch (BeansException e)
+        {
+            return null;
+        }
     }
 }
