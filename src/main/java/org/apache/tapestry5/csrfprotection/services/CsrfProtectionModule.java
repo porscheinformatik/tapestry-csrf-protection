@@ -3,6 +3,7 @@ package org.apache.tapestry5.csrfprotection.services;
 import org.apache.tapestry5.csrfprotection.CsrfConstants;
 import org.apache.tapestry5.csrfprotection.CsrfProtectionMode;
 import org.apache.tapestry5.csrfprotection.internal.CsrfComponentEventLinkTransformer;
+import org.apache.tapestry5.csrfprotection.internal.CsrfLinkTransformerDecorator;
 import org.apache.tapestry5.csrfprotection.internal.CsrfProtectionFilter;
 import org.apache.tapestry5.csrfprotection.internal.CsrfTokenManager;
 import org.apache.tapestry5.csrfprotection.internal.ProtectedPagesService;
@@ -15,10 +16,14 @@ import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.Decorate;
+import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.services.ComponentEventRequestFilter;
 import org.apache.tapestry5.services.ComponentEventRequestHandler;
 import org.apache.tapestry5.services.LibraryMapping;
 import org.apache.tapestry5.services.linktransform.ComponentEventLinkTransformer;
+import org.apache.tapestry5.services.linktransform.LinkTransformer;
 
 /**
  * IoC module for Tapestry CSRF Protection. CHECKSTYLE:OFF
@@ -29,6 +34,7 @@ public class CsrfProtectionModule
     {
         binder.bind(CsrfTokenManager.class);
         binder.bind(ProtectedPagesService.class);
+        binder.bind(ComponentEventLinkTransformer.class, CsrfComponentEventLinkTransformer.class).withSimpleId();
     }
 
     public static void contributeComponentClassResolver(Configuration<LibraryMapping> configuration)
@@ -50,11 +56,13 @@ public class CsrfProtectionModule
         }
     }
 
-    @Contribute(ComponentEventLinkTransformer.class)
-    public static void addCsrfComponentEventLinkTransformer(
-        OrderedConfiguration<ComponentEventLinkTransformer> configuration)
+    @Decorate(serviceInterface = LinkTransformer.class)
+    @Match("LinkTransformer")
+    public static LinkTransformer decorateLinkTransformer(Class<LinkTransformer> serviceInterface,
+        final LinkTransformer delegate, String serviceId,
+        final @Local ComponentEventLinkTransformer csrfComponentEventLinkTransformer)
     {
-        configuration.addInstance("csrf", CsrfComponentEventLinkTransformer.class, "after:*");
+        return new CsrfLinkTransformerDecorator(csrfComponentEventLinkTransformer, delegate);
     }
 
     @Contribute(ComponentEventRequestHandler.class)

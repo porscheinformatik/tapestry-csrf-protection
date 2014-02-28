@@ -23,8 +23,10 @@ public class CsrfComponentEventLinkTransformer implements ComponentEventLinkTran
      * @param protectedPagesService .
      * @param parameterName symbol {@link CsrfConstants#CSRF_TOKEN_PARAMETER_NAME}
      */
-    public CsrfComponentEventLinkTransformer(CsrfTokenManager csrfTokenProvider,
-        ProtectedPagesService protectedPagesService, @Symbol(CSRF_TOKEN_PARAMETER_NAME) String parameterName)
+    public CsrfComponentEventLinkTransformer(
+        CsrfTokenManager csrfTokenProvider,
+        ProtectedPagesService protectedPagesService,
+        @Symbol(CSRF_TOKEN_PARAMETER_NAME) String parameterName)
     {
         super();
         this.csrfTokenProvider = csrfTokenProvider;
@@ -32,9 +34,7 @@ public class CsrfComponentEventLinkTransformer implements ComponentEventLinkTran
         this.parameterName = parameterName;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public Link transformComponentEventLink(Link defaultLink, ComponentEventRequestParameters parameters)
     {
         if (protectedPagesService.isPageProtected(parameters))
@@ -42,12 +42,10 @@ public class CsrfComponentEventLinkTransformer implements ComponentEventLinkTran
             return defaultLink.addParameterValue(parameterName, csrfTokenProvider.getSessionToken().getToken());
         }
 
-        return defaultLink;
+        return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public ComponentEventRequestParameters decodeComponentEventRequest(Request request)
     {
         return null;
