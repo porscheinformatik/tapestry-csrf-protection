@@ -2,6 +2,7 @@ package org.apache.tapestry5.csrfprotection.internal;
 
 import org.apache.tapestry5.csrfprotection.CsrfConstants;
 import org.apache.tapestry5.csrfprotection.CsrfProtectionMode;
+import org.apache.tapestry5.csrfprotection.InheritableNotCsrfProtected;
 import org.apache.tapestry5.csrfprotection.NotCsrfProtected;
 import org.apache.tapestry5.ioc.annotations.Value;
 import org.apache.tapestry5.ioc.internal.util.TapestryException;
@@ -39,7 +40,8 @@ public class ProtectedPagesService
         }
 
         Class<?> pageClass = getPageClass(parameters);
-        return !pageClass.isAnnotationPresent(NotCsrfProtected.class);
+        return !(pageClass.isAnnotationPresent(NotCsrfProtected.class)
+        || pageClass.isAnnotationPresent(InheritableNotCsrfProtected.class));
     }
 
     private Class<?> getPageClass(ComponentEventRequestParameters parameters)
