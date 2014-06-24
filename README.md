@@ -24,7 +24,7 @@ Just add this module as a Maven (or Gradle or Ivy) dependency:
 	<dependency>
 		<groupId>org.apache.tapestry</groupId>
 		<artifactId>tapestry-csrf-protection</artifactId>
-		<version>{tapstry-csrf.version}</version>
+		<version>${tapstry-csrf.version}</version>
 	</dependency>
 	
 If you have pages that should not be checked for CSRF token, then add the annotation @NotCsrfProtected.
