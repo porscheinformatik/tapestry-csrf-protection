@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.apache.tapestry</groupId>
 	<artifactId>tapestry-csrf-protection</artifactId>
-	<version>1.1.0.BUILD-SNAPSHOT</version>
+	<version>1.1.0.RELEASE</version>
 	<packaging>jar</packaging>
 
 	<name>Tapestry CSRF Protection</name>
@@ -25,7 +25,7 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 		<url>https://github.com/porscheinformatik/tapestry-csrf-protection</url>
 		<connection>scm:git:http://github.com/porscheinformatik/tapestry-csrf-protection.git</connection>
 		<developerConnection>scm:git:http://github.com/porscheinformatik/tapestry-csrf-protection.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>1.1.0.RELEASE</tag>
 	</scm>
 
 	<properties>
