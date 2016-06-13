@@ -1,12 +1,14 @@
 package org.apache.tapestry5.csrfprotection;
 
+import java.io.Serializable;
+
 /**
  * Provides the information about an expected CSRF token.
  *
  * @see org.apache.tapestry5.csrfprotection.internal.DefaultCsrfToken
  * @since 1.1
  */
-public interface CsrfToken
+public interface CsrfToken extends Serializable
 {
     /**
      * Gets the HTTP header that the CSRF is populated on the response and can
