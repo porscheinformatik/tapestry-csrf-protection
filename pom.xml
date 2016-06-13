@@ -55,6 +55,7 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 			<groupId>net.sourceforge.tapestryxpath</groupId>
 			<artifactId>tapestry-xpath</artifactId>
 			<version>1.0.1</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
