@@ -29,7 +29,7 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 	</scm>
 
 	<properties>
-		<tapestry-release-version>5.3.7</tapestry-release-version>
+		<tapestry-release-version>5.3.8</tapestry-release-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -110,17 +110,4 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 		</plugins>
 	</build>
 
-	<reporting>
-		<!-- Adds a report detailing the components, mixins and base classes defined by this module. -->
-		<plugins>
-			<plugin>
-				<groupId>org.apache.tapestry</groupId>
-				<artifactId>tapestry-component-report</artifactId>
-				<version>${tapestry-release-version}</version>
-				<configuration>
-					<rootPackage>org.apache.tapestry.csrfprotection</rootPackage>
-				</configuration>
-			</plugin>
-		</plugins>
-	</reporting>
 </project>
