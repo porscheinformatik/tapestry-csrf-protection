@@ -1,8 +1,9 @@
 package org.apache.tapestry5.csrfprotection.internal;
 
 import org.apache.tapestry5.ioc.ObjectLocator;
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+
+import java.lang.reflect.Method;
 
 /**
  * Util class for getting Spring beans.
@@ -36,10 +37,11 @@ public final class SpringContextHelper
             return null;
         }
 
-        ApplicationContext applicationContext;
+        // org.springframework.context.ApplicationContext
+        Object applicationContext;
         try
         {
-            applicationContext = (ApplicationContext) objectLocator.getService(springAppContextClass);
+            applicationContext = objectLocator.getService(springAppContextClass);
         }
         catch (RuntimeException e)
         {
@@ -48,9 +50,10 @@ public final class SpringContextHelper
 
         try
         {
-            return applicationContext.getBean(beanTypeClass);
+            Method getBean = applicationContext.getClass().getMethod("getBean", Class.class);
+            return getBean.invoke(applicationContext, beanTypeClass);
         }
-        catch (BeansException e)
+        catch (Exception e)
         {
             return null;
         }
