@@ -2,17 +2,17 @@
 <suite name="csrfprotection Application Test Suite" annotations="1.5">
 	<test name="Unit Tests">
 		<packages>
-			<package name="org.apache.tapestry5.csrfprotection.internal" />
+			<package name="at.porscheinformatik.tapestry.csrfprotection.internal" />
 		</packages>
 	</test>
 	<test name="Auto Page Tests">
 		<packages>
-			<package name="org.apache.tapestry5.csrfprotection.tests.auto" />
+			<package name="at.porscheinformatik.tapestry.csrfprotection.tests.auto" />
 		</packages>
 	</test>
 	<test name="Off Page Tests">
 		<packages>
-			<package name="org.apache.tapestry5.csrfprotection.tests.off" />
+			<package name="at.porscheinformatik.tapestry.csrfprotection.tests.off" />
 		</packages>
 	</test>
 </suite>

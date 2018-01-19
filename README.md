@@ -22,7 +22,7 @@ This software is licensed under the Apache Software License, Version 2.0, http:/
 Just add this module as a Maven (or Gradle or Ivy) dependency: 
 
 	<dependency>
-		<groupId>org.apache.tapestry</groupId>
+		<groupId>at.porscheinformatik.tapestry</groupId>
 		<artifactId>tapestry-csrf-protection</artifactId>
 		<version>${tapstry-csrf.version}</version>
 	</dependency>
