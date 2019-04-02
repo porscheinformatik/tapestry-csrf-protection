@@ -1,9 +1,9 @@
 <html t:type="layout" title="testing Index"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
-<form id="form" method="post" action="/foo/beaneditform.bean.form" onsubmit="javascript:return Tapestry.waitForPage(event);">
+<form id="form" method="post" action="/beaneditform.bean.form" onsubmit="javascript:return Tapestry.waitForPage(event);">
 	<input type="hidden" name="t:formdata" value="H4sIAAAAAAAAAFvzloG1XIpBwik1Mc81JbPELb8o1yoJyNFLBfLyi4qLGKzyi9L1EgsSkzNS9UoSC1KLS4oqTfWS84tSczKTgHRuQX5eal5JsR7MjPwilYCi1ILEotRwAT/u1RXbJJkYGCoKyuUZZHFZo5eTn18AtEuPWLt8gOpVjD4VpGm6i622p5H5xgc0WjyMv6xlgJivyaCO0/yCovyC1KKSSniouRNrUwBUJzTkglNLSgtc88oyi/LzcoEKvASZCu8b6+syMTD6MHDArClhEPLJSixL1M9JzEvXDy4pysxLt64oKGHgKQHaBDOyXJlBEWSjPrIdTjn5ydnFViWpFSVpmak5KUC3muJ1a1JicaqeYxJQMDG5xA2kBeJI1dDD3A9Fj/8Bu4w7OT+vpCg/xy8xN7WQoY6BnWzHOJLqGKB5yanFxcGlSbmZxcWZ+XmH16WYpH2bd46MWPMkM9acc4CmosRbbti+WgUP8d80SpomqEkffw52JSMHY/oo3ter82Ts5w6wjQBniEyGOAQAAA=="/>
 	<input type="text" name="testProperty" id="testProperty" value="test"/>
-	<img src="/foo/assets/1.0-SNAPSHOT/tapestry/spacer.gif" alt="" class="t-error-icon" id="testProperty_icon" style="display: none;"/><input type="submit" class="t-beaneditor-submit" value="Create/Update"/>
+	<img src="/assets/1.0-SNAPSHOT/tapestry/spacer.gif" alt="" class="t-error-icon" id="testProperty_icon" style="display: none;"/><input type="submit" class="t-beaneditor-submit" value="Create/Update"/>
 </form>
 </html>

@@ -1,10 +1,10 @@
 <html t:type="layout" title="testing Index"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
-<form onsubmit="javascript:return Tapestry.waitForPage(event);" action="/foo/form.messageform" method="post" id="messageForm">
+<form onsubmit="javascript:return Tapestry.waitForPage(event);" action="/form.messageform" method="post" id="messageForm">
 <div class="t-invisible">
 
-<input value="2188910186759187737" name="t:antiCsrfToken" type="hidden"></input>
+<input value="2188910186759187737" name="_csrf" type="hidden"></input>
 <input value="H4sIAAAAAAAAAFvzloG1nI+Bxy2/KNcqN7W4ODE9tbiIwTS/KF0vsSAxOSNVrySxILW4pKjSVC85vyg1JzNJLymxOFXPMQkomJhc4paZmpOiEpxaUlqgGnqY+6Ho8T9MDIw+DNzJ+XklRfk5fom5qSUMQj5ZiWWJ+jmJeen6wSVFmXnp1hUFJQzsUCuxOMGRVCcEFOUnA3UHlyblZhYXZ+bnHV6XYpL2bd45JgaGigIAs05usOkAAAA=" name="t:formdata" type="hidden"></input>
 </div>
 <input id="message" name="message" type="text"></input>

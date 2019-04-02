@@ -5,5 +5,18 @@ package at.porscheinformatik.tapestry.csrfprotection.tests.auto.pages;
  */
 public class FormAttack
 {
+    void onAction()
+    {
+
+    }
+
+    void onEvent()
+    {
+
+    }
+    void onSubmit()
+    {
+
+    }
 
 }

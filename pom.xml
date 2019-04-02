@@ -36,9 +36,9 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 		<tag>HEAD</tag>
 	</scm>
 	<properties>
-		<tapestry-release-version>5.3.8</tapestry-release-version>
+		<tapestry-release-version>5.4.3</tapestry-release-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -49,13 +49,13 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>[3.2,)</version>
+			<version>5.0.10.RELEASE</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -70,6 +70,14 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 			<version>${tapestry-release-version}</version>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+          <version>1.2.3</version>
+          <scope>test</scope>
+        </dependency>
+
+
 	</dependencies>
 	<build>
 		<plugins>

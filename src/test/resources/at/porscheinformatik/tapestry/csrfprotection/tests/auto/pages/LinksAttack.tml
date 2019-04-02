@@ -2,12 +2,12 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
      <p>
-<a id="actionLink" href="/foo/links.actionlink">ActionLink</a>
+<a id="actionLink" href="/links.actionlink">ActionLink</a>
 </p>
 <p>
-<a id="eventLink1" href="/foo/links:event">EventLink1</a>
+<a id="eventLink1" href="/links:event">EventLink1</a>
 </p>
-<p><a id="eventLink2" href="/foo/links:event">EventLink2</a></p>
+<p><a id="eventLink2" href="/links:event">EventLink2</a></p>
 </html>
 
 

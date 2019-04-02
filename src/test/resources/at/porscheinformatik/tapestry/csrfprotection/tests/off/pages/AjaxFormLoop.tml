@@ -23,8 +23,8 @@
 		</table>
 	</form>
 
-	<a href="/foo/ajaxformloop.ajaxloop:triggerremoverow/bla" id="removeRowLink">Remove Row</a>
-	<a href="/foo/ajaxformloop.ajaxloop.rowinjector:inject?t:formcomponentid=AjaxFormLoop:ajaxloopform&amp;t:formid=AjaxLoopForm"
+	<a href="/ajaxformloop.ajaxloop:triggerremoverow?t:rowvalue=bla" id="removeRowLink">Remove Row</a>
+	<a href="/ajaxformloop.ajaxloop.rowinjector:inject?t:formcomponentid=AjaxFormLoop:ajaxloopform&amp;t:formid=AjaxLoopForm"
 		id="addRowLink">Add Row</a>
 
 	<t:eventlink t:id="dummy" id="dummy">Dummy</t:eventlink>

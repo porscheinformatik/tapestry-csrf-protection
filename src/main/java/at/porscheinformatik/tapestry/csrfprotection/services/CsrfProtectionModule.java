@@ -1,15 +1,8 @@
 package at.porscheinformatik.tapestry.csrfprotection.services;
 
-import at.porscheinformatik.tapestry.csrfprotection.CsrfConstants;
-import at.porscheinformatik.tapestry.csrfprotection.CsrfProtectionMode;
-import at.porscheinformatik.tapestry.csrfprotection.internal.CsrfComponentEventLinkTransformer;
-import at.porscheinformatik.tapestry.csrfprotection.internal.CsrfLinkTransformerDecorator;
-import at.porscheinformatik.tapestry.csrfprotection.internal.CsrfProtectionFilter;
-import at.porscheinformatik.tapestry.csrfprotection.internal.CsrfTokenManager;
-import at.porscheinformatik.tapestry.csrfprotection.internal.ProtectedPagesService;
-import at.porscheinformatik.tapestry.csrfprotection.internal.SessionCsrfTokenRepository;
-import at.porscheinformatik.tapestry.csrfprotection.internal.SpringContextHelper;
-import at.porscheinformatik.tapestry.csrfprotection.internal.SpringCsrfTokenRepository;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ObjectLocator;
@@ -24,12 +17,25 @@ import org.apache.tapestry5.services.ComponentEventRequestHandler;
 import org.apache.tapestry5.services.LibraryMapping;
 import org.apache.tapestry5.services.linktransform.ComponentEventLinkTransformer;
 import org.apache.tapestry5.services.linktransform.LinkTransformer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import at.porscheinformatik.tapestry.csrfprotection.CsrfConstants;
+import at.porscheinformatik.tapestry.csrfprotection.CsrfProtectionMode;
+import at.porscheinformatik.tapestry.csrfprotection.internal.CsrfComponentEventLinkTransformer;
+import at.porscheinformatik.tapestry.csrfprotection.internal.CsrfLinkTransformerDecorator;
+import at.porscheinformatik.tapestry.csrfprotection.internal.CsrfProtectionFilter;
+import at.porscheinformatik.tapestry.csrfprotection.internal.CsrfTokenManager;
+import at.porscheinformatik.tapestry.csrfprotection.internal.ProtectedPagesService;
+import at.porscheinformatik.tapestry.csrfprotection.internal.SessionCsrfTokenRepository;
+import at.porscheinformatik.tapestry.csrfprotection.internal.SpringCsrfTokenRepository;
 
 /**
  * IoC module for Tapestry CSRF Protection. CHECKSTYLE:OFF
  */
 public class CsrfProtectionModule
 {
+    private static final Logger logger = LoggerFactory.getLogger(CsrfProtectionModule.class);
     public static void bind(ServiceBinder binder)
     {
         binder.bind(CsrfTokenManager.class);
@@ -42,18 +48,34 @@ public class CsrfProtectionModule
         configuration.add(new LibraryMapping("csrf", "at.porscheinformatik.tapestry.csrfprotection"));
     }
 
-    public static CsrfTokenRepository buildCsrfTokenRepository(ObjectLocator objectLocator)
+    public static CsrfTokenRepository buildCsrfTokenRepository(ObjectLocator objectLocator,
+            HttpServletRequest request, HttpServletResponse response)
     {
-        // check if spring is there and if CsrfTokenRepository is registered
-        if (SpringContextHelper.getSpringBean(objectLocator,
-            "org.springframework.security.web.csrf.CsrfTokenRepository") != null)
+
+        Class<?> springCsrfTokenRepositoryClass = null;
+        try
         {
-            return objectLocator.proxy(CsrfTokenRepository.class, SpringCsrfTokenRepository.class);
+            springCsrfTokenRepositoryClass = Class.forName("org.springframework.security.web.csrf.CsrfTokenRepository");
         }
-        else
+        catch (ClassNotFoundException e)
         {
-            return objectLocator.proxy(CsrfTokenRepository.class, SessionCsrfTokenRepository.class);
+            logger.debug("Spring CsrfTokenRepository not found in classpath");
         }
+
+        if (springCsrfTokenRepositoryClass != null) {
+            Object o = null;
+            try {
+                o = objectLocator.getService(springCsrfTokenRepositoryClass);
+            } catch (Exception e){
+                logger.warn("Error looking up Spring CsrfTokenRepository Service", e);
+            }
+            if (o != null) {
+                logger.debug("Using Spring CsrfTokenRepository Service");
+                return objectLocator.autobuild(SpringCsrfTokenRepository.class);
+            }
+        }
+        logger.debug("Using SessionCsrfTokenRepository Service");
+        return objectLocator.autobuild(SessionCsrfTokenRepository.class);
     }
 
     @Decorate(serviceInterface = LinkTransformer.class)
