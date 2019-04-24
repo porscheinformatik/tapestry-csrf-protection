@@ -1,8 +1,8 @@
 <html t:type="layout" title="testing Index"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
-    <form t:type="form" t:id="ajaxLoop">
-    	<t:errors/>
+    <form t:type="form" t:id="AjaxLoopForm">
+		<t:errors />
     	<table>
 			<thead>
 				<tr>
@@ -10,7 +10,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr t:type="AjaxFormLoop" t:source="myList" t:value="testBean" t:encoder="encoder">				
+				<tr t:id="AjaxLoop" t:type="AjaxFormLoop" t:source="myList" t:value="testBean" t:encoder="encoder">
 					<t:submitnotifier>
 						<td><input t:type="TextField" t:id="testProperty" t:value="testBean.testProperty"/></td>
 						<td><t:removerowlink>remove</t:removerowlink></td>
@@ -19,12 +19,11 @@
 			</tbody>
 	 	</table>    
 	 </form>
-	 
-	<a id="removeRowLink" href="/foo/ajaxformloop.ajaxformloop:triggerremoverow/bla"/>
-   	<a id="addRowLink" href="/foo/ajaxformloop.ajaxformloop.rowinjector:inject"/>
-   	
-   	 <t:eventlink t:id="dummy" id="dummy">Dummy</t:eventlink>
+
+	<a id="removeRowLink" href="/ajaxformloop.ajaxloop:triggerremoverow?t:rowvalue=bla">Remove row</a>
+	<a id="addRowLink" href="/ajaxformloop.ajaxloop:injectrow">Add</a>
+
+	<t:eventlink t:id="dummy" id="dummy">Dummy</t:eventlink>
 </html>
 
 
- 

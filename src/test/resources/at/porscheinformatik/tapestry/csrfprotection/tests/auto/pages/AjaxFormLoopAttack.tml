@@ -1,5 +1,5 @@
-<html t:type="layout" title="testing Index" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+<html t:type="layout" title="testing Index" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
 	xmlns:p="tapestry:parameter">
-	<a id="removeRowLink" href="/foo/ajaxformloop.ajaxformloop:triggerremoverow/bla">Add</a>
-	<a id="addRowLink" href="/foo/ajaxformloop.ajaxformloop.rowinjector:inject">Remove</a>
+	<a id="removeRowLink" href="/ajaxformloop.ajaxformloop:triggerremoverow/bla">Add</a>
+	<a id="addRowLink" href="/ajaxformloop.ajaxformloop.rowinjector:inject">Remove</a>
 </html>

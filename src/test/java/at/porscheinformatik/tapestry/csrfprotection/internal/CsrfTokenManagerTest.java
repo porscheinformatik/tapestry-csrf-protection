@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 public class CsrfTokenManagerTest
 {
-    private TestableRequest request = new TestableRequestImpl();
+    private TestableRequest request = new TestableRequestImpl("/");
 
     @Test
     public void noTokenNewSession()

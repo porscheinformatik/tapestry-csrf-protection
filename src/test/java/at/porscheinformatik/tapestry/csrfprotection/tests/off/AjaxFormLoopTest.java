@@ -1,23 +1,25 @@
 package at.porscheinformatik.tapestry.csrfprotection.tests.off;
 
 import static at.porscheinformatik.tapestry.csrfprotection.CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 
-import at.porscheinformatik.tapestry.csrfprotection.util.PageTesterUtils;
 import org.apache.tapestry5.dom.Document;
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.test.PageTester;
 import org.jaxen.JaxenException;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.formos.tapestry.xpath.TapestryXPath;
 
+import at.porscheinformatik.tapestry.csrfprotection.util.PageTesterUtils;
+
 /**
  * Tests the BeanEditForm in combination with the cross-site request forgery protection.
  */
-public class AjaxFormLoopTest extends Assert
+public class AjaxFormLoopTest
 {
     /**
      * A page that contains a form is tested. It should contain the CSRF protection token.

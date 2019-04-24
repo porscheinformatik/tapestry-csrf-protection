@@ -1,5 +1,5 @@
 <html t:type="layout" title="testing Index"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
     <t:form t:id="messageForm">	
 		<t:textfield t:id="message"/>
