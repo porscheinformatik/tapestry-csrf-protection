@@ -1,24 +1,25 @@
 package at.porscheinformatik.tapestry.csrfprotection.tests.auto;
 
-import java.util.List;
+import static org.testng.Assert.assertTrue;
 
-import at.porscheinformatik.tapestry.csrfprotection.CsrfConstants;
-import at.porscheinformatik.tapestry.csrfprotection.services.CsrfProtectionModule;
-import at.porscheinformatik.tapestry.csrfprotection.tests.auto.services.AutoModeModule;
+import java.util.List;
 
 import org.apache.tapestry5.dom.Document;
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.test.PageTester;
 import org.jaxen.JaxenException;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.formos.tapestry.xpath.TapestryXPath;
 
+import at.porscheinformatik.tapestry.csrfprotection.CsrfConstants;
+import at.porscheinformatik.tapestry.csrfprotection.services.CsrfProtectionModule;
+import at.porscheinformatik.tapestry.csrfprotection.tests.auto.services.AutoModeModule;
+
 /**
  * Tests the BeanEditForm in combination with the cross-site request forgery protection.
  */
-public class AjaxFormLoopTest extends Assert
+public class AjaxFormLoopTest
 {
 
     /**
@@ -36,12 +37,12 @@ public class AjaxFormLoopTest extends Assert
         org.apache.tapestry5.dom.Document doc = tester.renderPage("AjaxFormLoop");
         // simple test, just checking if the event link rendered in javascript contains the anti CSRF token
         assertTrue(
-            doc.toString().contains("/foo/ajaxformloop.ajaxformloop:triggerremoverow/bla?" + CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME),
+            doc.toString().contains("/ajaxformloop.ajaxloop:triggerremoverow?" + CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME),
             "The antiCsrfToken parameter is not present for the event link rendered in JavaScript by the RemoveRowLink component.");
 
         // the link created by the AddRowLink component should also contain the anti CSRF token
         assertTrue(
-            doc.toString().contains("/foo/ajaxformloop.ajaxformloop.rowinjector:inject?" + CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME),
+            doc.toString().contains("/ajaxformloop.ajaxloop:injectrow?" + CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME),
             "The antiCsrfToken parameter is not present for the event link rendered in JavaScript by the AddRowLink component.");
     }
 
@@ -74,8 +75,8 @@ public class AjaxFormLoopTest extends Assert
 
         Element removeRowLink = selectElements.get(0);
         String href = removeRowLink.getAttribute("href");
-        href += "?" + CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME + "=" + token;
-        removeRowLink.attribute("href", href);
+        href += "&" + CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME + "=" + token;
+        removeRowLink.forceAttributes("href", href);
         Document response = tester.clickLink(removeRowLink);
 
         assertTrue(response.toString().contains("A component event handler method returned the value {}"),
