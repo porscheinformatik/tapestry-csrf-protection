@@ -36,7 +36,7 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 		<tag>HEAD</tag>
 	</scm>
 	<properties>
-		<tapestry-release-version>5.4.4</tapestry-release-version>
+		<tapestry-release-version>5.6.0</tapestry-release-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 	</properties>
@@ -49,7 +49,7 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>5.1.5.RELEASE</version>
+			<version>5.3.4.RELEASE</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
