@@ -1,9 +1,9 @@
 package at.porscheinformatik.tapestry.csrfprotection.internal;
 
-import org.apache.tapestry5.Link;
+import org.apache.tapestry5.http.Link;
 import org.apache.tapestry5.services.ComponentEventRequestParameters;
 import org.apache.tapestry5.services.PageRenderRequestParameters;
-import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.http.services.Request;
 import org.apache.tapestry5.services.linktransform.ComponentEventLinkTransformer;
 import org.apache.tapestry5.services.linktransform.LinkTransformer;
 

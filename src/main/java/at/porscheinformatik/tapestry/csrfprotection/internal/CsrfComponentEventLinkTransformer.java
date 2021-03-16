@@ -2,11 +2,11 @@ package at.porscheinformatik.tapestry.csrfprotection.internal;
 
 import static at.porscheinformatik.tapestry.csrfprotection.CsrfConstants.CSRF_TOKEN_PARAMETER_NAME;
 
-import org.apache.tapestry5.Link;
+import org.apache.tapestry5.http.Link;
 import at.porscheinformatik.tapestry.csrfprotection.CsrfConstants;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.ComponentEventRequestParameters;
-import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.http.services.Request;
 import org.apache.tapestry5.services.linktransform.ComponentEventLinkTransformer;
 
 /**

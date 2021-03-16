@@ -1,6 +1,6 @@
 package at.porscheinformatik.tapestry.csrfprotection.internal;
 
-import org.apache.tapestry5.ioc.ObjectLocator;
+import org.apache.tapestry5.commons.ObjectLocator;
 import org.springframework.context.ApplicationContext;
 
 import java.lang.reflect.Method;

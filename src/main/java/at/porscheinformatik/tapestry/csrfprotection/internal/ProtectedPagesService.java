@@ -5,7 +5,7 @@ import at.porscheinformatik.tapestry.csrfprotection.CsrfProtectionMode;
 import at.porscheinformatik.tapestry.csrfprotection.InheritedNotCsrfProtected;
 import at.porscheinformatik.tapestry.csrfprotection.NotCsrfProtected;
 import org.apache.tapestry5.ioc.annotations.Value;
-import org.apache.tapestry5.ioc.internal.util.TapestryException;
+import org.apache.tapestry5.commons.internal.util.TapestryException;
 import org.apache.tapestry5.services.ComponentClassResolver;
 import org.apache.tapestry5.services.ComponentEventRequestParameters;
 
