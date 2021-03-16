@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.tapestry5.services.ComponentEventRequestFilter;
 import org.apache.tapestry5.services.ComponentEventRequestHandler;
 import org.apache.tapestry5.services.ComponentEventRequestParameters;
-import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.http.services.Request;
 
 /**
  * This filter checks each component event request or page render request for cross-site request forgery attacks. If a

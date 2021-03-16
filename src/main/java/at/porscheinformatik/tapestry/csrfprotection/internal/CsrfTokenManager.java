@@ -10,7 +10,7 @@ import at.porscheinformatik.tapestry.csrfprotection.CsrfException;
 import at.porscheinformatik.tapestry.csrfprotection.CsrfToken;
 import at.porscheinformatik.tapestry.csrfprotection.services.CsrfTokenRepository;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.http.services.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -10,10 +10,10 @@ import at.porscheinformatik.tapestry.csrfprotection.internal.ProtectedPagesServi
 import at.porscheinformatik.tapestry.csrfprotection.internal.SessionCsrfTokenRepository;
 import at.porscheinformatik.tapestry.csrfprotection.internal.SpringContextHelper;
 import at.porscheinformatik.tapestry.csrfprotection.internal.SpringCsrfTokenRepository;
-import org.apache.tapestry5.ioc.Configuration;
-import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.ObjectLocator;
-import org.apache.tapestry5.ioc.OrderedConfiguration;
+import org.apache.tapestry5.commons.Configuration;
+import org.apache.tapestry5.commons.MappedConfiguration;
+import org.apache.tapestry5.commons.ObjectLocator;
+import org.apache.tapestry5.commons.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Decorate;
