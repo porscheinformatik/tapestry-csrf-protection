@@ -1,7 +1,6 @@
 Tapestry CSRF Protection
 ========================
 
-[![Build Status](https://travis-ci.org/porscheinformatik/tapestry-csrf-protection.png?branch=master)](https://travis-ci.org/porscheinformatik/tapestry-csrf-protection)
 [![Maven Central](https://img.shields.io/maven-central/v/at.porscheinformatik.tapestry/tapestry-csrf-protection)](https://search.maven.org/artifact/at.porscheinformatik.tapestry/tapestry-csrf-protection)
 
 Cross-Site-Request-Forgery (CSRF) protection for Apache Tapestry 5.
