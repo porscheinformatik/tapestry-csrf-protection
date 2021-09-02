@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>at.porscheinformatik.tapestry</groupId>
 	<artifactId>tapestry-csrf-protection</artifactId>
-	<version>2.1.0.BUILD-SNAPSHOT</version>
+	<version>2.0.2.RELEASE</version>
 	<packaging>jar</packaging>
 	<name>Tapestry CSRF Protection</name>
 	<description>Cross-Site-Request-Forgery (CSRF) protection for Apache Tapestry 5.
