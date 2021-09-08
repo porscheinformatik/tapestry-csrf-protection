@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>at.porscheinformatik.tapestry</groupId>
 	<artifactId>tapestry-csrf-protection</artifactId>
-	<version>3.0.0.BUILD-SNAPSHOT</version>
+	<version>3.1.0.BUILD-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Tapestry CSRF Protection</name>
 	<description>Cross-Site-Request-Forgery (CSRF) protection for Apache Tapestry 5.
@@ -49,7 +49,7 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>5.3.8.RELEASE</version>
+			<version>5.5.2</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
