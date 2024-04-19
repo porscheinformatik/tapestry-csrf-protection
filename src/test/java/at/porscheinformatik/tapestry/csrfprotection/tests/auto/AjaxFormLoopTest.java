@@ -1,11 +1,12 @@
 package at.porscheinformatik.tapestry.csrfprotection.tests.auto;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 
-import org.apache.tapestry5.dom.Document;
 import org.apache.tapestry5.dom.Element;
+import org.apache.tapestry5.internal.test.TestableResponse;
 import org.apache.tapestry5.test.PageTester;
 import org.jaxen.JaxenException;
 import org.testng.annotations.Test;
@@ -59,10 +60,9 @@ public class AjaxFormLoopTest
 
         org.apache.tapestry5.dom.Document doc = tester.renderPage("AjaxFormLoop");
 
-        //obtain anti CSRF token from dummy link	
+        //obtain anti CSRF token from dummy link
         List<Element> dummyLinkElements = TapestryXPath.xpath("id('dummy')").selectElements(doc);
-        assertTrue(dummyLinkElements.size() == 1,
-            "There should be only one dummy link used to extract an anti CSRF token.");
+        assertEquals(dummyLinkElements.size(), 1, "There should be only one dummy link used to extract an anti CSRF token.");
 
         Element element = dummyLinkElements.get(0);
         String token =
@@ -71,15 +71,15 @@ public class AjaxFormLoopTest
                     + (CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME + "=").length());
 
         List<Element> selectElements = TapestryXPath.xpath("id('removeRowLink')").selectElements(doc);
-        assertTrue(selectElements.size() == 1, "There should be only one remove row link.");
+        assertEquals(selectElements.size(), 1, "There should be only one remove row link.");
 
         Element removeRowLink = selectElements.get(0);
         String href = removeRowLink.getAttribute("href");
         href += "&" + CsrfConstants.DEFAULT_CSRF_TOKEN_PARAMETER_NAME + "=" + token;
         removeRowLink.forceAttributes("href", href);
-        Document response = tester.clickLink(removeRowLink);
+        TestableResponse response = tester.clickLinkAndReturnResponse(removeRowLink);
 
-        assertTrue(response.toString().contains("A component event handler method returned the value {}"),
-            "AjaxFormLoop component should does not work properly anymore (removeRowLink).");
+        assertEquals(response.getStatus(), 200);
+        assertEquals(response.getOutput(), "{}", "AjaxFormLoop component should does not work properly anymore (removeRowLink).");
     }
 }
