@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [4.0.0] - unreleased
+## [4.0.0](https://github.com/porscheinformatik/tapestry-csrf-protection/compare/v3.0.1.RELEASE...v4.0.0.RELEASE) - 2024-04-19
 
 ### Changed
 

@@ -8,14 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import at.porscheinformatik.tapestry.csrfprotection.CsrfException;
-import at.porscheinformatik.tapestry.csrfprotection.internal.CsrfTokenManager;
-import at.porscheinformatik.tapestry.csrfprotection.internal.DefaultCsrfToken;
 import at.porscheinformatik.tapestry.csrfprotection.services.CsrfTokenRepository;
 import org.apache.tapestry5.internal.test.TestableRequest;
 import org.apache.tapestry5.internal.test.TestableRequestImpl;
 import org.testng.annotations.Test;
 
-public class CsrfTokenManagerTest
+public class CsrfTokenManagerTest 
 {
     private TestableRequest request = new TestableRequestImpl("/");
 
