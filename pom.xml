@@ -1,10 +1,10 @@
-<project 
-	xmlns="http://maven.apache.org/POM/4.0.0" 
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>at.porscheinformatik.tapestry</groupId>
 	<artifactId>tapestry-csrf-protection</artifactId>
-	<version>4.0.0.BUILD-SNAPSHOT</version>
+	<version>5.0.0.BUILD-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Tapestry CSRF Protection</name>
 	<description>Cross-Site-Request-Forgery (CSRF) protection for Apache Tapestry 5.
@@ -36,26 +36,26 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 		<tag>HEAD</tag>
 	</scm>
 	<properties>
-		<tapestry-release-version>5.8.6</tapestry-release-version>
+		<tapestry-release-version>5.9.0-preview</tapestry-release-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
-			<artifactId>tapestry-core</artifactId>
+			<artifactId>tapestry-core-jakarta</artifactId>
 			<version>${tapestry-release-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>5.8.12</version>
+			<version>6.3.1</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.0.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -180,4 +180,10 @@ This project is based on the Google Summer of Code 2011 project done by Markus J
 			</distributionManagement>
 		</profile>
 	</profiles>
+	<repositories>
+		<repository>
+			<id>apache-staging</id>
+			<url>https://repository.apache.org/content/repositories/staging/</url>
+		</repository>
+	</repositories>
 </project>

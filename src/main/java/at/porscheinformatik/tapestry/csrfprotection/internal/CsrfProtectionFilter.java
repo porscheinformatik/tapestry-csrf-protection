@@ -2,7 +2,7 @@ package at.porscheinformatik.tapestry.csrfprotection.internal;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.tapestry5.services.ComponentEventRequestFilter;
 import org.apache.tapestry5.services.ComponentEventRequestHandler;
@@ -23,7 +23,7 @@ public class CsrfProtectionFilter implements ComponentEventRequestFilter
 
     /**
      * Creates a new filter and injects the required services and configuration parameters.
-     * 
+     *
      * @param csrfTokenManager .
      * @param protectedPagesService .
      * @param request .
@@ -43,7 +43,7 @@ public class CsrfProtectionFilter implements ComponentEventRequestFilter
 
     /**
      * Handles a component event request and evaluates the cross-site request forgery protection.
-     * 
+     *
      * @param parameters .
      * @param handler .
      * @throws IOException when delegate throws
