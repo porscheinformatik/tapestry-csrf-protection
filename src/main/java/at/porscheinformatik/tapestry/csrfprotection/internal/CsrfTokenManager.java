@@ -2,8 +2,8 @@ package at.porscheinformatik.tapestry.csrfprotection.internal;
 
 import static at.porscheinformatik.tapestry.csrfprotection.CsrfConstants.CSRF_TOKEN_PARAMETER_NAME;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import at.porscheinformatik.tapestry.csrfprotection.CsrfConstants;
 import at.porscheinformatik.tapestry.csrfprotection.CsrfException;
@@ -28,11 +28,11 @@ public class CsrfTokenManager
 
     /**
      * Initializes the secure token that will stay the same for the whole life cycle of this instance.
-     * 
+     *
      * @param tokenRepository an implementation of {@link CsrfTokenRepository}
      * @param parameterName symbol {@link CsrfConstants#CSRF_TOKEN_PARAMETER_NAME}
      */
-    public CsrfTokenManager(CsrfTokenRepository tokenRepository, 
+    public CsrfTokenManager(CsrfTokenRepository tokenRepository,
         @Symbol(CSRF_TOKEN_PARAMETER_NAME) String parameterName)
     {
         this.tokenRepository = tokenRepository;
@@ -41,7 +41,7 @@ public class CsrfTokenManager
 
     /**
      * Returns the token stored in this instance.
-     * 
+     *
      * @return the stored token or a newly generated one
      */
     public CsrfToken getSessionToken()
@@ -58,7 +58,7 @@ public class CsrfTokenManager
     /**
      * This method performs the check of the token. It extracts the current client token from the request and the
      * current server-side token by accessing the CsrfTokenProvider instance assigned in this session.
-     * 
+     *
      * @param request .
      * @param httpServletRequest .
      * @throws CsrfException when token not there or token does not match
@@ -71,12 +71,12 @@ public class CsrfTokenManager
 
         if (LOGGER.isDebugEnabled())
         {
-            LOGGER.debug("SessionToken: " + serverToken + ", ClientToken: " + requestParam);
+            LOGGER.debug("SessionToken: {}, ClientToken: {}", serverToken, requestParam);
         }
 
         if (serverToken == null || !serverToken.getToken().equals(requestParam))
         {
-            // check if session id changed - if yes Spring Security (or another security framework) 
+            // check if session id changed - if yes Spring Security (or another security framework)
             // requested a new session after login
             HttpSession session = httpServletRequest.getSession(false);
             if (session != null && session.isNew())

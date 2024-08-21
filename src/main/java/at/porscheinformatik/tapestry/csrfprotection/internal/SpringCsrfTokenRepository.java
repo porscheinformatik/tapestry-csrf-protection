@@ -1,7 +1,7 @@
 package at.porscheinformatik.tapestry.csrfprotection.internal;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import at.porscheinformatik.tapestry.csrfprotection.CsrfToken;
 import at.porscheinformatik.tapestry.csrfprotection.services.CsrfTokenRepository;

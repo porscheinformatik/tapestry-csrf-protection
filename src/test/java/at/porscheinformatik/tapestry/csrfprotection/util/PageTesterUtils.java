@@ -6,7 +6,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import at.porscheinformatik.tapestry.csrfprotection.services.CsrfProtectionModule;
 import org.apache.tapestry5.http.services.Request;
@@ -23,18 +23,14 @@ public final class PageTesterUtils
     public static PageTester autoModePageTester()
     {
         String appPackage = "at.porscheinformatik.tapestry.csrfprotection.tests.auto";
-        PageTester tester =
-            new PageTester(appPackage, "AutoMode", "src/test/webapp",
+        return new PageTester(appPackage, "AutoMode", "src/test/webapp",
                 CsrfProtectionModule.class, HttpMockModule.class);
-        return tester;
     }
 
     public static PageTester offModePageTester()
     {
         String appPackage = "at.porscheinformatik.tapestry.csrfprotection.tests.off";
-        PageTester tester =
-            new PageTester(appPackage, "OffMode", "src/test/webapp", CsrfProtectionModule.class);
-        return tester;
+        return new PageTester(appPackage, "OffMode", "src/test/webapp", CsrfProtectionModule.class);
     }
 
     public static class HttpMockModule

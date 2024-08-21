@@ -4,8 +4,8 @@ import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import at.porscheinformatik.tapestry.csrfprotection.CsrfException;
 import at.porscheinformatik.tapestry.csrfprotection.services.CsrfTokenRepository;
@@ -13,9 +13,9 @@ import org.apache.tapestry5.internal.test.TestableRequest;
 import org.apache.tapestry5.internal.test.TestableRequestImpl;
 import org.testng.annotations.Test;
 
-public class CsrfTokenManagerTest 
+public class CsrfTokenManagerTest
 {
-    private TestableRequest request = new TestableRequestImpl("/");
+    private final TestableRequest request = new TestableRequestImpl("/");
 
     @Test
     public void noTokenNewSession()

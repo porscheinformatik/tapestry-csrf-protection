@@ -5,8 +5,8 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.testng.Assert.assertEquals;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import at.porscheinformatik.tapestry.csrfprotection.CsrfToken;
 import org.easymock.EasyMock;
@@ -53,8 +53,6 @@ public class SpringCsrfTokenRepositoryTest
         expect(springCsrfTokenRepository.loadToken(EasyMock.anyObject(HttpServletRequest.class)))
             .andReturn(SPRING_TOKEN);
         replay(request, response, springCsrfTokenRepository);
-        SpringCsrfTokenRepository csrfTokenRepository =
-            new SpringCsrfTokenRepository(springCsrfTokenRepository, request, response);
-        return csrfTokenRepository;
+        return new SpringCsrfTokenRepository(springCsrfTokenRepository, request, response);
     }
 }
