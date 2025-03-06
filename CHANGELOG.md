@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Update Tapestry to 5.9.0
+- Switch to Jakarta EE API and Tapestry 5.9
 - Update Spring Security to 6.3.7
 
 ## [4.0.0](https://github.com/porscheinformatik/tapestry-csrf-protection/compare/v3.0.1.RELEASE...v4.0.0.RELEASE) - 2024-04-19
